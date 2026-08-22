@@ -4,184 +4,262 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>UJECK — Union des Jeunes Engagés pour la Commune de Keur Momar Sarr</title>
-  <meta name="description" content="UJECK — Éducation, développement et solidarité à Keur Momar Sarr (Louga, Sénégal).">
+  <meta name="description" content="UJECK — Éducation, développement et solidarité à Keur Momar Sarr, Sénégal.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <style>
-    :root{--bleu:#2B2DC8;--bleu-fonce:#1a1f8e;--bleu-nuit:#0d1260;--bleu-vif:#0099FF;--or:#F5C500;--or-fonce:#d4a900;--vert:#2ECC71;--vert-fonce:#1a5c2e;--blanc:#ffffff;--gris:rgba(255,255,255,0.65);--card-bg:rgba(255,255,255,0.06);--card-bord:rgba(255,255,255,0.12)}
+    :root{
+      --bleu:#0055A4;--bleu-fonce:#003d7a;--bleu-nuit:#001a3d;
+      --or:#F5C500;--or-fonce:#d4a900;--or-clair:#fff8e1;
+      --vert:#2ECC71;--vert-fonce:#1a5c2e;
+      --blanc:#ffffff;--gris:rgba(255,255,255,0.7);
+      --card:rgba(255,255,255,0.07);--bord:rgba(255,255,255,0.12);
+    }
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
-    body{font-family:'Inter',system-ui,sans-serif;background:var(--bleu-nuit);color:var(--blanc);line-height:1.65;overflow-x:hidden}
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,18,96,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.08)}
-    .nav-inner{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:64px}
-    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-    .nav-logo img{width:38px;height:38px;border-radius:50%;border:2px solid var(--or);object-fit:cover}
-    .nav-logo span{font-weight:700;font-size:15px;color:var(--blanc)}
-    .nav-links{display:flex;align-items:center;gap:6px}
-    .nav-links a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:14px;font-weight:500;padding:7px 13px;border-radius:8px;transition:all .2s}
-    .nav-links a:hover{color:var(--blanc);background:rgba(255,255,255,0.08)}
-    .nav-cta{background:var(--or)!important;color:var(--bleu-nuit)!important;font-weight:700!important;padding:8px 18px!important;border-radius:20px!important}
-    .nav-cta:hover{background:var(--or-fonce)!important}
+    body{font-family:'Inter',sans-serif;background:var(--bleu-nuit);color:#fff;overflow-x:hidden;line-height:1.65}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(0,26,61,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(245,197,0,0.15)}
+    .nav-in{max-width:1140px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px}
+    .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+    .nav-logo img{width:44px;height:44px;border-radius:50%;border:2px solid var(--or);object-fit:cover}
+    .nav-logo-text{display:flex;flex-direction:column}
+    .nav-logo-text strong{font-size:16px;font-weight:700;color:#fff;line-height:1.1}
+    .nav-logo-text span{font-size:10px;color:var(--or);letter-spacing:1px;text-transform:uppercase}
+    .nav-links{display:flex;align-items:center;gap:4px}
+    .nav-links a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:14px;font-weight:500;padding:8px 14px;border-radius:8px;transition:all .2s}
+    .nav-links a:hover{color:#fff;background:rgba(255,255,255,0.08)}
+    .nav-cta{background:var(--or)!important;color:var(--bleu-nuit)!important;font-weight:700!important;border-radius:24px!important}
+    .nav-cta:hover{background:var(--or-fonce)!important;transform:translateY(-1px)}
     .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
-    .burger span{width:22px;height:2px;background:var(--blanc);border-radius:2px}
-    @media(max-width:700px){.nav-links{display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--bleu-nuit);padding:12px;gap:4px;border-bottom:1px solid rgba(255,255,255,0.1)}.nav-links.open{display:flex}.burger{display:flex}}
-    .hero{min-height:100vh;display:flex;align-items:center;padding:80px 20px 60px;background:linear-gradient(135deg,var(--bleu-nuit) 0%,var(--bleu-fonce) 50%,var(--bleu) 100%);position:relative;overflow:hidden}
-    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 50%,rgba(0,153,255,0.12),transparent),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(245,197,0,0.07),transparent)}
-    .hero-inner{max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative}
-    .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(245,197,0,0.12);border:1px solid rgba(245,197,0,0.3);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--or);font-weight:600;letter-spacing:.5px;margin-bottom:20px}
-    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,50px);line-height:1.15;margin-bottom:18px}
-    .hero h1 em{color:var(--or);font-style:normal}
-    .hero-lead{font-size:16px;color:var(--gris);margin-bottom:30px;max-width:460px;line-height:1.7}
-    .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
-    .btn-or{display:inline-flex;align-items:center;gap:8px;background:var(--or);color:var(--bleu-nuit);font-weight:700;font-size:15px;padding:12px 26px;border-radius:30px;text-decoration:none;transition:all .2s;border:none;cursor:pointer}
-    .btn-or:hover{background:var(--or-fonce);transform:translateY(-2px)}
-    .btn-ghost{display:inline-flex;align-items:center;background:rgba(255,255,255,0.08);color:var(--blanc);font-weight:600;font-size:15px;padding:12px 24px;border-radius:30px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);transition:all .2s}
-    .btn-ghost:hover{background:rgba(255,255,255,0.14)}
-    .hero-logo-wrap{display:flex;justify-content:center;align-items:center}
-    .hero-logo{width:clamp(180px,22vw,280px);height:clamp(180px,22vw,280px);border-radius:50%;border:4px solid rgba(245,197,0,0.4);box-shadow:0 0 60px rgba(0,153,255,0.25),0 0 120px rgba(245,197,0,0.1);object-fit:cover;animation:float 4s ease-in-out infinite}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-    @media(max-width:768px){.hero-inner{grid-template-columns:1fr;text-align:center}.hero-lead{margin:0 auto 30px}.hero-btns{justify-content:center}.hero-logo-wrap{order:-1}.hero-logo{width:150px;height:150px}}
-    .stats-bar{background:rgba(255,255,255,0.04);border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);padding:28px 20px}
-    .stats-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
-    .stat{text-align:center}
-    .stat-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--blanc)}
-    .stat-label{font-size:12px;color:var(--or);margin-top:2px;font-weight:500}
-    @media(max-width:600px){.stats-inner{grid-template-columns:repeat(2,1fr)}.stat:last-child{grid-column:1/-1}}
-    section{padding:72px 20px}
-    .si{max-width:1100px;margin:0 auto}
-    .section-tag{font-size:11px;font-weight:700;color:var(--bleu-vif);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px}
-    .section-title{font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,36px);margin-bottom:12px}
-    .section-lead{color:var(--gris);font-size:15px;max-width:560px;line-height:1.7;margin-bottom:32px}
-    .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    .pillar{background:var(--card-bg);border:1px solid var(--card-bord);border-radius:16px;padding:28px;transition:transform .25s,box-shadow .25s}
-    .pillar:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.3)}
-    .pillar-icon{font-size:36px;margin-bottom:14px}
-    .pillar h4{font-size:17px;font-weight:700;margin-bottom:10px}
-    .pillar p{color:var(--gris);font-size:14px;line-height:1.7}
-    .pillar-edu{border-top:3px solid var(--vert)}
-    .pillar-dev{border-top:3px solid var(--or)}
-    .pillar-soc{border-top:3px solid var(--bleu-vif)}
-    @media(max-width:700px){.pillars{grid-template-columns:1fr}}
-    .bureau-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .membre{background:var(--card-bg);border:1px solid var(--card-bord);border-radius:14px;padding:18px;display:flex;align-items:center;gap:12px}
-    .membre-av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex-shrink:0;object-fit:cover;border:2px solid rgba(245,197,0,0.4)}
-    .membre-photo{width:42px;height:42px;border-radius:50%;object-fit:cover;object-position:top;flex-shrink:0;border:2px solid rgba(245,197,0,0.5)}
-    /* Cartes spéciales pour président et SG */
-    .membre-star{background:var(--card-bg);border:1px solid rgba(245,197,0,0.3);border-radius:16px;padding:0;overflow:hidden;display:flex;flex-direction:column;grid-column:span 1}
-    .membre-star-photo{width:100%;height:180px;object-fit:cover;object-position:top center}
-    .membre-star-info{padding:14px 16px}
-    .membre-star-info strong{display:block;font-size:14px;font-weight:700;color:#fff}
-    .membre-star-info span{font-size:12px;color:var(--or)}
-    .av-or{background:rgba(245,197,0,0.2);color:var(--or);border:1px solid rgba(245,197,0,0.4)}
-    .av-vert{background:rgba(46,204,113,0.2);color:var(--vert);border:1px solid rgba(46,204,113,0.4)}
-    .av-bleu{background:rgba(0,153,255,0.2);color:var(--bleu-vif);border:1px solid rgba(0,153,255,0.4)}
-    .membre strong{display:block;font-size:13px;font-weight:700}
-    .membre span{font-size:12px;color:var(--or)}
-    @media(max-width:700px){.bureau-grid{grid-template-columns:1fr}}
-    .terr-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
-    .terr-info p{color:var(--gris);font-size:15px;line-height:1.75;margin-bottom:14px}
-    .carte-wrap{border-radius:16px;overflow:hidden;border:1px solid var(--card-bord);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
-    .carte-wrap iframe{width:100%;height:320px;display:block;border:none}
-    @media(max-width:700px){.terr-grid{grid-template-columns:1fr}}
-    .valeurs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-    .valeur{background:var(--card-bg);border:1px solid var(--card-bord);border-radius:14px;padding:22px;display:flex;gap:14px}
-    .valeur-icon{font-size:28px;flex-shrink:0}
-    .valeur h4{font-size:16px;font-weight:700;margin-bottom:6px}
-    .valeur p{font-size:14px;color:var(--gris);line-height:1.65}
-    @media(max-width:600px){.valeurs-grid{grid-template-columns:1fr}}
-    .adhesion-section{background:linear-gradient(135deg,var(--vert-fonce),#0f3d1c)}
-    .etapes-bar{display:flex;align-items:center;justify-content:center;margin-bottom:36px}
-    .etape-ind{display:flex;flex-direction:column;align-items:center;gap:5px}
-    .etape-ind .enum{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;transition:all .3s}
-    .etape-ind .elbl{font-size:11px;font-weight:600;transition:all .3s}
-    .etape-ind.active .enum{background:var(--or);color:var(--bleu-nuit)}
-    .etape-ind.active .elbl{color:var(--or)}
-    .etape-ind.done .enum{background:var(--vert);color:#fff}
-    .etape-ind.done .elbl{color:var(--vert)}
-    .etape-ind.pending .enum{background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.4)}
-    .etape-ind.pending .elbl{color:rgba(255,255,255,0.35)}
-    .etape-line{width:60px;height:2px;background:rgba(255,255,255,0.15);margin-bottom:16px}
-    .adh-box{max-width:620px;margin:0 auto}
-    .adh-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:18px;padding:28px}
-    .adh-card h3{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:6px}
-    .adh-lead{color:rgba(255,255,255,0.65);font-size:14px;margin-bottom:22px}
-    label{font-size:13px;font-weight:600;color:rgba(255,255,255,0.85);display:block;margin-bottom:6px}
-    input,textarea,select{width:100%;padding:11px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#fff;font-family:inherit;font-size:14px;outline:none;transition:border-color .2s;-webkit-text-fill-color:#fff}
-    input:focus,textarea:focus,select:focus{border-color:rgba(245,197,0,0.6)}
-    input::placeholder,textarea::placeholder{color:rgba(255,255,255,0.4)}
-    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
-    .fg{margin-bottom:16px}
-    @media(max-width:540px){.form-row{grid-template-columns:1fr}}
+    .burger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+    @media(max-width:720px){
+      .nav-links{display:none;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:var(--bleu-nuit);padding:16px;gap:4px;border-bottom:1px solid rgba(255,255,255,0.1)}
+      .nav-links.open{display:flex}
+      .burger{display:flex}
+    }
+
+    /* HERO */
+    .hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,var(--bleu-nuit) 0%,var(--bleu-fonce) 40%,var(--bleu) 100%)}
+    .hero-bg::after{content:'';position:absolute;inset:0;background:url('kms_lac.png') center/cover no-repeat;opacity:0.08}
+    .hero-deco{position:absolute;top:-100px;right:-100px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(245,197,0,0.08) 0%,transparent 70%)}
+    .hero-deco2{position:absolute;bottom:-150px;left:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,85,164,0.3) 0%,transparent 70%)}
+    .hero-in{max-width:1140px;margin:0 auto;padding:100px 24px 60px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(245,197,0,0.15);border:1px solid rgba(245,197,0,0.4);border-radius:24px;padding:6px 16px;font-size:12px;color:var(--or);font-weight:700;letter-spacing:.5px;margin-bottom:24px}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,4.5vw,58px);line-height:1.1;margin-bottom:20px;color:#fff}
+    .hero h1 em{color:var(--or);font-style:normal;position:relative}
+    .hero-lead{font-size:17px;color:var(--gris);margin-bottom:32px;line-height:1.75;max-width:480px}
+    .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+    .btn-or{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--or),var(--or-fonce));color:var(--bleu-nuit);font-weight:700;font-size:15px;padding:14px 28px;border-radius:32px;text-decoration:none;transition:all .25s;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(245,197,0,0.3)}
+    .btn-or:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,197,0,0.4)}
+    .btn-ghost{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);color:#fff;font-weight:600;font-size:15px;padding:14px 26px;border-radius:32px;text-decoration:none;border:1px solid rgba(255,255,255,0.25);transition:all .25s}
+    .btn-ghost:hover{background:rgba(255,255,255,0.18);transform:translateY(-1px)}
+    .hero-right{display:flex;justify-content:center;align-items:center;position:relative}
+    .hero-logo-outer{position:relative}
+    .hero-logo-ring{width:clamp(240px,28vw,340px);height:clamp(240px,28vw,340px);border-radius:50%;background:linear-gradient(135deg,rgba(245,197,0,0.2),rgba(0,85,164,0.2));display:flex;align-items:center;justify-content:center;animation:spin-slow 20s linear infinite}
+    @keyframes spin-slow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .hero-logo-img{width:clamp(200px,24vw,300px);height:clamp(200px,24vw,300px);border-radius:50%;object-fit:cover;border:4px solid var(--or);box-shadow:0 0 60px rgba(245,197,0,0.2),0 0 120px rgba(0,85,164,0.2);position:absolute;animation:float 5s ease-in-out infinite}
+    @keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-12px) rotate(2deg)}}
+    @media(max-width:768px){
+      .hero-in{grid-template-columns:1fr;text-align:center;padding-top:90px}
+      .hero-lead{margin:0 auto 32px}
+      .hero-btns{justify-content:center}
+      .hero-right{order:-1;margin-bottom:20px}
+      .hero-logo-ring,.hero-logo-img{width:160px;height:160px}
+    }
+
+    /* STATS */
+    .stats{background:linear-gradient(90deg,rgba(245,197,0,0.08),rgba(0,85,164,0.12));border-top:1px solid rgba(245,197,0,0.15);border-bottom:1px solid rgba(245,197,0,0.15);padding:28px 24px}
+    .stats-in{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+    .stat{text-align:center;padding:8px}
+    .stat-n{font-family:'Playfair Display',serif;font-size:32px;font-weight:800;color:#fff}
+    .stat-l{font-size:12px;color:var(--or);margin-top:3px;font-weight:600;letter-spacing:.5px}
+    @media(max-width:600px){.stats-in{grid-template-columns:repeat(2,1fr)}.stat:last-child{grid-column:1/-1}}
+
+    /* SECTIONS */
+    section{padding:80px 24px}
+    .si{max-width:1140px;margin:0 auto}
+    .stag{font-size:11px;font-weight:700;color:var(--or);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+    .stag::before{content:'';width:24px;height:2px;background:var(--or);border-radius:2px}
+    .stit{font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,42px);margin-bottom:14px;line-height:1.2}
+    .slead{color:var(--gris);font-size:16px;max-width:580px;line-height:1.75;margin-bottom:40px}
+    .sep{height:1px;background:linear-gradient(90deg,transparent,rgba(245,197,0,0.2),transparent);max-width:1140px;margin:0 auto}
+
+    /* PILIERS */
+    .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .pillar{background:var(--card);border:1px solid var(--bord);border-radius:20px;padding:32px;transition:all .3s;position:relative;overflow:hidden}
+    .pillar::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+    .pillar-edu::before{background:linear-gradient(90deg,var(--vert),#27AE60)}
+    .pillar-dev::before{background:linear-gradient(90deg,var(--or),var(--or-fonce))}
+    .pillar-soc::before{background:linear-gradient(90deg,#0099FF,var(--bleu))}
+    .pillar:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,0.3);border-color:rgba(245,197,0,0.2)}
+    .pillar-icon{font-size:40px;margin-bottom:18px}
+    .pillar h4{font-size:19px;font-weight:700;margin-bottom:12px}
+    .pillar p{color:var(--gris);font-size:14px;line-height:1.75}
+    @media(max-width:720px){.pillars{grid-template-columns:1fr}}
+
+    /* BUREAU */
+    .bureau-top{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:20px}
+    .bureau-rest{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .mb-card{background:var(--card);border:1px solid var(--bord);border-radius:20px;overflow:hidden;transition:all .3s}
+    .mb-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.3);border-color:rgba(245,197,0,0.25)}
+    .mb-photo{width:100%;height:220px;object-fit:cover;object-position:top center}
+    .mb-info{padding:16px 20px}
+    .mb-info strong{display:block;font-size:16px;font-weight:700;color:#fff;margin-bottom:4px}
+    .mb-info span{font-size:13px;color:var(--or);font-weight:600}
+    .mb-small{background:var(--card);border:1px solid var(--bord);border-radius:16px;padding:16px;display:flex;align-items:center;gap:12px;transition:all .3s}
+    .mb-small:hover{transform:translateY(-2px);border-color:rgba(245,197,0,0.2)}
+    .mb-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex-shrink:0}
+    .av-or{background:rgba(245,197,0,0.2);color:var(--or);border:1.5px solid rgba(245,197,0,0.4)}
+    .av-vert{background:rgba(46,204,113,0.2);color:var(--vert);border:1.5px solid rgba(46,204,113,0.4)}
+    .av-bleu{background:rgba(0,153,255,0.2);color:#0099FF;border:1.5px solid rgba(0,153,255,0.4)}
+    .mb-small strong{display:block;font-size:13px;font-weight:700}
+    .mb-small span{font-size:11px;color:var(--or)}
+    @media(max-width:720px){.bureau-top{grid-template-columns:1fr}.bureau-rest{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:480px){.bureau-rest{grid-template-columns:1fr}}
+
+    /* TERRITOIRE */
+    .terr-header{margin-bottom:32px}
+    .galerie{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:200px 200px;gap:12px;border-radius:20px;overflow:hidden;margin-bottom:28px}
+    .gal-item{position:relative;overflow:hidden}
+    .gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+    .gal-item:hover img{transform:scale(1.08)}
+    .gal-item.grand{grid-row:1/3}
+    .gal-caption{position:absolute;bottom:0;left:0;right:0;padding:12px;background:linear-gradient(transparent,rgba(0,0,0,0.75));font-size:12px;color:#fff;font-weight:600}
+    .carte-box{border-radius:16px;overflow:hidden;border:1px solid var(--bord);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+    .carte-box iframe{width:100%;height:300px;display:block;border:none}
+    @media(max-width:720px){.galerie{grid-template-columns:1fr 1fr;grid-template-rows:160px 160px 160px}.gal-item.grand{grid-row:auto}}
+
+    /* VALEURS */
+    .valeurs{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+    .valeur{background:var(--card);border:1px solid var(--bord);border-radius:18px;padding:24px;display:flex;gap:16px;transition:all .3s}
+    .valeur:hover{transform:translateY(-3px);border-color:rgba(245,197,0,0.2)}
+    .val-icon{font-size:30px;flex-shrink:0;margin-top:2px}
+    .valeur h4{font-size:17px;font-weight:700;margin-bottom:8px}
+    .valeur p{font-size:14px;color:var(--gris);line-height:1.7}
+    @media(max-width:600px){.valeurs{grid-template-columns:1fr}}
+
+    /* ADHÉSION */
+    .adh-section{background:linear-gradient(135deg,#0f3d1c 0%,#1a5c2e 50%,#0f3d1c 100%);position:relative;overflow:hidden}
+    .adh-section::before{content:'';position:absolute;top:-200px;right:-200px;width:500px;height:500px;border-radius:50%;background:rgba(245,197,0,0.04)}
+    .adh-section::after{content:'';position:absolute;bottom:-150px;left:-100px;width:400px;height:400px;border-radius:50%;background:rgba(46,204,113,0.06)}
+    .etapes-bar{display:flex;align-items:center;justify-content:center;margin-bottom:40px;position:relative;z-index:1}
+    .ei{display:flex;flex-direction:column;align-items:center;gap:6px}
+    .ei .en{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;transition:all .3s}
+    .ei .el{font-size:11px;font-weight:700;letter-spacing:.5px;transition:all .3s}
+    .ei.active .en{background:var(--or);color:var(--bleu-nuit)}
+    .ei.active .el{color:var(--or)}
+    .ei.done .en{background:var(--vert);color:#fff}
+    .ei.done .el{color:var(--vert)}
+    .ei.pending .en{background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.35)}
+    .ei.pending .el{color:rgba(255,255,255,0.35)}
+    .eline{width:64px;height:2px;background:rgba(255,255,255,0.15);margin-bottom:18px}
+    .adh-box{max-width:640px;margin:0 auto;position:relative;z-index:1}
+    .adh-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:22px;padding:32px;backdrop-filter:blur(8px)}
+    .adh-card h3{font-family:'Playfair Display',serif;font-size:24px;margin-bottom:8px}
+    .adh-lead{color:rgba(255,255,255,0.65);font-size:14px;margin-bottom:24px;line-height:1.65}
+    label{font-size:13px;font-weight:600;color:rgba(255,255,255,0.85);display:block;margin-bottom:7px}
+    input,textarea{width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.08);color:#fff;font-family:inherit;font-size:14px;outline:none;transition:border-color .2s;-webkit-text-fill-color:#fff}
+    input:focus,textarea:focus{border-color:rgba(245,197,0,0.6);background:rgba(255,255,255,0.1)}
+    input::placeholder,textarea::placeholder{color:rgba(255,255,255,0.38)}
+    .fg{margin-bottom:18px}
+    .frow{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+    @media(max-width:540px){.frow{grid-template-columns:1fr}}
     .sec-btns{display:flex;gap:10px;flex-wrap:wrap}
-    .sec-btn{padding:8px 16px;border-radius:20px;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.8);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+    .sec-btn{padding:9px 18px;border-radius:22px;border:1.5px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.8);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
     .sec-btn.sel{border-color:var(--or);background:rgba(245,197,0,0.18);color:var(--or)}
-    .btn-submit{width:100%;padding:14px;background:linear-gradient(135deg,var(--or),var(--or-fonce));color:var(--bleu-nuit);font-weight:700;font-size:15px;border:none;border-radius:12px;cursor:pointer;transition:all .2s;margin-top:4px}
-    .btn-submit:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 8px 24px rgba(245,197,0,0.3)}
-    .btn-submit:disabled{opacity:.5;cursor:not-allowed}
-    .pay-montant{background:rgba(245,197,0,0.1);border:2px solid rgba(245,197,0,0.4);border-radius:14px;padding:20px;text-align:center;margin-bottom:20px}
-    .pay-montant .gros{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:var(--or)}
-    .pay-montant .num-dest{font-size:15px;color:#fff;font-weight:700;letter-spacing:2px;margin-top:6px}
-    .pay-montant .sub{font-size:12px;color:rgba(255,255,255,0.55);margin-top:4px}
-    .pay-choix{display:flex;gap:12px;margin-bottom:16px}
-    .pay-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 12px;border-radius:14px;cursor:pointer;transition:all .2s;border:2px solid}
-    .pay-btn-wave{background:rgba(30,144,255,0.12);border-color:rgba(30,144,255,0.4)}
-    .pay-btn-wave:hover,.pay-btn-wave.choisi{background:rgba(30,144,255,0.28);border-color:#1E90FF}
-    .pay-btn-om{background:rgba(255,140,0,0.12);border-color:rgba(255,140,0,0.4)}
-    .pay-btn-om:hover,.pay-btn-om.choisi{background:rgba(255,140,0,0.28);border-color:#FF8C00}
-    .pay-btn .emo{font-size:34px}
-    .pay-btn .titre{font-size:15px;font-weight:700;color:#fff}
-    .pay-btn .sous{font-size:11px;color:rgba(255,255,255,0.55)}
-    .pay-msg{display:none;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.35);border-radius:10px;padding:12px;font-size:13px;color:rgba(46,204,113,0.95);margin-bottom:14px;line-height:1.65}
-    .btn-jpaye{width:100%;padding:14px;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.3);font-weight:700;font-size:15px;border:1px solid rgba(255,255,255,0.12);border-radius:12px;cursor:not-allowed;transition:all .3s}
-    .btn-jpaye.actif{background:linear-gradient(135deg,var(--vert),#27AE60);color:#fff;cursor:pointer;border:none}
-    .btn-retour{width:100%;padding:12px;background:rgba(255,255,255,0.07);color:#fff;font-size:14px;border:1px solid rgba(255,255,255,0.18);border-radius:12px;cursor:pointer;margin-top:10px;transition:all .2s}
-    .btn-retour:hover{background:rgba(255,255,255,0.12)}
-    .confetti{font-size:52px;margin-bottom:12px}
-    .confirm-checks{background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);border-radius:14px;padding:18px;margin:16px 0;text-align:left}
-    .confirm-checks p{font-size:13px;color:rgba(46,204,113,0.9);margin-bottom:4px}
-    .confirm-checks .note{color:rgba(255,255,255,0.55);margin-top:10px;font-size:12px}
-    .btn-wa{display:block;width:100%;padding:14px;background:#25D366;color:#fff;font-weight:700;font-size:15px;border:none;border-radius:12px;cursor:pointer;text-align:center;text-decoration:none;margin-top:12px;transition:all .2s}
-    .btn-wa:hover{background:#1da851;transform:translateY(-1px)}
-    .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-    .contact-card{background:var(--card-bg);border:1px solid var(--card-bord);border-radius:16px;padding:24px}
-    .contact-card h4{font-size:16px;font-weight:700;margin-bottom:16px;color:var(--or)}
-    .c-row{display:flex;flex-direction:column;gap:12px}
-    .c-item strong{font-size:11px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:3px}
-    .c-item a{color:var(--or);text-decoration:none;font-weight:600}
-    .c-item a:hover{text-decoration:underline}
-    .c-item .tel{font-size:16px;font-weight:700;letter-spacing:1px}
+    .btn-sub{width:100%;padding:15px;background:linear-gradient(135deg,var(--or),var(--or-fonce));color:var(--bleu-nuit);font-weight:700;font-size:16px;border:none;border-radius:14px;cursor:pointer;transition:all .25s;margin-top:6px;letter-spacing:.3px}
+    .btn-sub:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 30px rgba(245,197,0,0.35)}
+    .btn-sub:disabled{opacity:.45;cursor:not-allowed;transform:none}
+
+    /* PAIEMENT */
+    .pay-mont{background:rgba(245,197,0,0.1);border:2px solid rgba(245,197,0,0.4);border-radius:16px;padding:22px;text-align:center;margin-bottom:22px}
+    .pay-mont .gros{font-family:'Playfair Display',serif;font-size:46px;font-weight:800;color:var(--or)}
+    .pay-mont .dest{font-size:16px;color:#fff;font-weight:700;letter-spacing:2px;margin-top:8px}
+    .pay-mont .sub{font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px}
+    .pay-choix{display:flex;gap:14px;margin-bottom:18px}
+    .pbtn{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px 14px;border-radius:16px;cursor:pointer;transition:all .25s;border:2px solid}
+    .pbtn-wave{background:rgba(30,144,255,0.1);border-color:rgba(30,144,255,0.35)}
+    .pbtn-wave:hover,.pbtn-wave.choisi{background:rgba(30,144,255,0.25);border-color:#1E90FF;transform:translateY(-2px)}
+    .pbtn-om{background:rgba(255,140,0,0.1);border-color:rgba(255,140,0,0.35)}
+    .pbtn-om:hover,.pbtn-om.choisi{background:rgba(255,140,0,0.25);border-color:#FF8C00;transform:translateY(-2px)}
+    .pbtn .emo{font-size:36px}
+    .pbtn .pt{font-size:16px;font-weight:700;color:#fff}
+    .pbtn .ps{font-size:11px;color:rgba(255,255,255,0.5)}
+    .pay-msg{display:none;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);border-radius:12px;padding:14px;font-size:13px;color:rgba(46,204,113,0.95);margin-bottom:16px;line-height:1.65}
+    .upload-zone{display:none;margin-bottom:16px}
+    .upload-label{display:flex;flex-direction:column;align-items:center;gap:8px;background:rgba(255,255,255,0.05);border:2px dashed rgba(255,255,255,0.2);border-radius:14px;padding:24px;cursor:pointer;transition:all .2s}
+    .upload-label:hover{border-color:rgba(245,197,0,0.4);background:rgba(245,197,0,0.05)}
+    .upload-label .ui{font-size:36px}
+    .upload-label .ut{font-size:14px;font-weight:600;color:#fff}
+    .upload-label .us{font-size:12px;color:rgba(255,255,255,0.4)}
+    .btn-jpaye{width:100%;padding:15px;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.3);font-weight:700;font-size:15px;border:1px solid rgba(255,255,255,0.12);border-radius:14px;cursor:not-allowed;transition:all .3s;margin-bottom:10px}
+    .btn-jpaye.actif{background:linear-gradient(135deg,var(--vert),#27AE60);color:#fff;cursor:pointer;border:none;box-shadow:0 6px 20px rgba(46,204,113,0.3)}
+    .btn-ret{width:100%;padding:13px;background:rgba(255,255,255,0.07);color:#fff;font-size:14px;border:1px solid rgba(255,255,255,0.15);border-radius:14px;cursor:pointer;transition:all .2s}
+    .btn-ret:hover{background:rgba(255,255,255,0.12)}
+
+    /* CONFIRMATION */
+    .conf-emoji{font-size:56px;margin-bottom:16px}
+    .conf-checks{background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.28);border-radius:16px;padding:20px;margin:20px 0;text-align:left}
+    .conf-checks p{font-size:13px;color:rgba(46,204,113,0.9);margin-bottom:6px}
+    .conf-checks .note{color:rgba(255,255,255,0.55);margin-top:12px;font-size:12px;line-height:1.65}
+    .btn-wa{display:block;width:100%;padding:15px;background:linear-gradient(135deg,#25D366,#1da851);color:#fff;font-weight:700;font-size:15px;border:none;border-radius:14px;cursor:pointer;text-align:center;text-decoration:none;box-shadow:0 6px 20px rgba(37,211,102,0.25);transition:all .25s}
+    .btn-wa:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,0.35)}
+
+    /* CONTACT */
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .cc{background:var(--card);border:1px solid var(--bord);border-radius:20px;padding:28px;transition:all .3s}
+    .cc:hover{border-color:rgba(245,197,0,0.2)}
+    .cc h4{font-size:17px;font-weight:700;margin-bottom:20px;color:var(--or);display:flex;align-items:center;gap:8px}
+    .ci{margin-bottom:14px}
+    .ci strong{font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:4px}
+    .ci a{color:var(--or);text-decoration:none;font-weight:600}
+    .ci a:hover{text-decoration:underline}
+    .ci .tel{font-size:17px;font-weight:700;letter-spacing:1px}
     @media(max-width:600px){.contact-grid{grid-template-columns:1fr}}
-    footer{background:rgba(0,0,0,0.3);border-top:1px solid rgba(255,255,255,0.08);padding:40px 20px}
-    .foot-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}
-    .foot-brand strong{font-size:16px;color:var(--or)}
-    .foot-brand p{font-size:13px;color:rgba(255,255,255,0.45);margin-top:6px;line-height:1.65}
-    .foot-nav strong{font-size:12px;color:rgba(255,255,255,0.5);font-weight:600;display:block;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px}
-    .foot-nav ul{list-style:none}
-    .foot-nav li{margin-bottom:6px}
-    .foot-nav a{font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none}
-    .foot-nav a:hover{color:var(--or)}
-    @media(max-width:600px){.foot-inner{grid-template-columns:1fr}}
-    .sep{height:1px;background:rgba(255,255,255,0.07);max-width:1100px;margin:0 auto}
-    .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+
+    /* FOOTER */
+    footer{background:rgba(0,0,0,0.4);border-top:1px solid rgba(255,255,255,0.07);padding:48px 24px 32px}
+    .foot-in{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px}
+    .fb img{width:52px;height:52px;border-radius:50%;border:2px solid var(--or);margin-bottom:12px;object-fit:cover}
+    .fb strong{display:block;font-size:17px;color:var(--or);margin-bottom:8px}
+    .fb p{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7}
+    .fn strong{font-size:11px;color:rgba(255,255,255,0.45);font-weight:700;display:block;margin-bottom:14px;text-transform:uppercase;letter-spacing:1.5px}
+    .fn ul{list-style:none}
+    .fn li{margin-bottom:8px}
+    .fn a{font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;transition:color .2s}
+    .fn a:hover{color:var(--or)}
+    .foot-bottom{max-width:1140px;margin:32px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.06);font-size:12px;color:rgba(255,255,255,0.3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+    @media(max-width:600px){.foot-in{grid-template-columns:1fr}}
+
+    /* Animations */
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
     .reveal.visible{opacity:1;transform:none}
+    #form-err{font-size:13px;color:#fff;background:rgba(220,50,50,0.2);border:1px solid rgba(220,50,50,0.5);border-radius:10px;padding:12px 16px;margin-top:12px;display:none;line-height:1.5}
   </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <div class="nav-inner">
+  <div class="nav-in">
     <a href="#" class="nav-logo">
-      <img src="new_new_Logo_PNG.png" alt="Logo UJECK" onerror="this.style.display='none'">
-      <span>UJECK</span>
+      <img src="logo.png" alt="Logo UJECK" onerror="this.style.display='none'">
+      <div class="nav-logo-text">
+        <strong>UJECK</strong>
+        <span>Keur Momar Sarr</span>
+      </div>
     </a>
     <div class="nav-links" id="nav-links">
       <a href="#mission">Nos piliers</a>
       <a href="#gouvernance">Bureau</a>
       <a href="#territoire">Commune</a>
       <a href="#contact">Contact</a>
-      <a href="#adhesion" class="nav-cta">Adhérer</a>
+      <a href="#adhesion" class="nav-cta">✊ Adhérer</a>
     </div>
     <div class="burger" id="burger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
@@ -190,31 +268,37 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-deco"></div>
+  <div class="hero-deco2"></div>
+  <div class="hero-in">
     <div>
-      <div class="hero-badge">🇸🇳 Keur Momar Sarr · Louga · Sénégal</div>
+      <div class="hero-badge">🇸🇳 Fondée le 21 septembre 2024 · Louga, Sénégal</div>
       <h1>Union des Jeunes <em>Engagés</em> pour la Commune</h1>
-      <p class="hero-lead">Ensemble, construisons l'avenir de Keur Momar Sarr autour de l'éducation, du développement et de la solidarité sociale.</p>
+      <p class="hero-lead">Ensemble, construisons l'avenir de Keur Momar Sarr autour de l'éducation, du développement local et de la solidarité entre jeunes.</p>
       <div class="hero-btns">
         <a href="#adhesion" class="btn-or">✊ Adhérer maintenant</a>
-        <a href="#mission" class="btn-ghost">Découvrir nos actions</a>
+        <a href="#mission" class="btn-ghost">Découvrir nos actions →</a>
       </div>
     </div>
-    <div class="hero-logo-wrap">
-      <img src="new_new_Logo_PNG.png" alt="Logo UJECK" class="hero-logo" onerror="this.style.display='none'">
+    <div class="hero-right">
+      <div class="hero-logo-outer">
+        <div class="hero-logo-ring"></div>
+        <img src="logo.png" alt="Logo UJECK" class="hero-logo-img" onerror="this.style.display='none'">
+      </div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- STATS -->
-<div class="stats-bar">
-  <div class="stats-inner">
-    <div class="stat"><div class="stat-num">67</div><div class="stat-label">Membres actifs</div></div>
-    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Piliers d'action</div></div>
-    <div class="stat"><div class="stat-num">1</div><div class="stat-label">Commune unie</div></div>
-    <div class="stat"><div class="stat-num">1 000</div><div class="stat-label">FCFA adhésion</div></div>
-    <div class="stat"><div class="stat-num">500</div><div class="stat-label">FCFA / mois</div></div>
+<div class="stats">
+  <div class="stats-in">
+    <div class="stat"><div class="stat-n">67</div><div class="stat-l">Membres actifs</div></div>
+    <div class="stat"><div class="stat-n">3</div><div class="stat-l">Piliers d'action</div></div>
+    <div class="stat"><div class="stat-n">1</div><div class="stat-l">Commune unie</div></div>
+    <div class="stat"><div class="stat-n">1 000</div><div class="stat-l">FCFA adhésion</div></div>
+    <div class="stat"><div class="stat-n">500</div><div class="stat-l">FCFA / mois</div></div>
   </div>
 </div>
 <div class="sep"></div>
@@ -222,13 +306,25 @@
 <!-- MISSION -->
 <section id="mission">
   <div class="si reveal">
-    <div class="section-tag">Notre mission</div>
-    <h2 class="section-title">Trois piliers, une vision commune</h2>
-    <p class="section-lead">Pour le bien-être et l'essor de Keur Momar Sarr, l'UJECK agit sur trois fronts complémentaires.</p>
+    <div class="stag">Notre mission</div>
+    <h2 class="stit">Trois piliers, une vision commune</h2>
+    <p class="slead">Pour le bien-être et l'essor de Keur Momar Sarr, l'UJECK agit sur trois fronts complémentaires.</p>
     <div class="pillars">
-      <article class="pillar pillar-edu"><div class="pillar-icon">📚</div><h4>Éducation</h4><p>Soutien scolaire, alphabétisation, accès au savoir et promotion de la culture locale pour tous les jeunes de la commune.</p></article>
-      <article class="pillar pillar-dev"><div class="pillar-icon">🌱</div><h4>Développement</h4><p>Initiatives de développement local, valorisation des ressources et appui aux projets communautaires porteurs d'avenir.</p></article>
-      <article class="pillar pillar-soc"><div class="pillar-icon">🤝</div><h4>Social</h4><p>Solidarité, cohésion sociale et bien-être des habitants et des familles de la commune de Keur Momar Sarr.</p></article>
+      <article class="pillar pillar-edu">
+        <div class="pillar-icon">📚</div>
+        <h4>Éducation</h4>
+        <p>Soutien scolaire, alphabétisation, accès au savoir et promotion de la culture locale pour tous les jeunes de la commune.</p>
+      </article>
+      <article class="pillar pillar-dev">
+        <div class="pillar-icon">🌱</div>
+        <h4>Développement</h4>
+        <p>Initiatives de développement local, valorisation des ressources et appui aux projets communautaires porteurs d'avenir.</p>
+      </article>
+      <article class="pillar pillar-soc">
+        <div class="pillar-icon">🤝</div>
+        <h4>Social</h4>
+        <p>Solidarité, cohésion sociale et bien-être des habitants et des familles de la commune de Keur Momar Sarr.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -237,49 +333,61 @@
 <!-- BUREAU -->
 <section id="gouvernance">
   <div class="si reveal">
-    <div class="section-tag">Gouvernance</div>
-    <h2 class="section-title">Notre bureau</h2>
-    <p class="section-lead">Élus à l'unanimité lors de l'Assemblée Générale Constitutive du 21 septembre 2024.</p>
-    <div class="bureau-grid">
-      <!-- Président avec photo -->
-      <div class="membre-star">
-        <img src="president.png" alt="Ndiaga Lo - Président UJECK" class="membre-star-photo">
-        <div class="membre-star-info">
-          <strong>Ndiaga Lo</strong>
-          <span>Président</span>
-        </div>
+    <div class="stag">Gouvernance</div>
+    <h2 class="stit">Notre bureau exécutif</h2>
+    <p class="slead">Élus à l'unanimité lors de l'Assemblée Générale Constitutive du 21 septembre 2024.</p>
+    <div class="bureau-top">
+      <div class="mb-card">
+        <img src="president.png" alt="Ndiaga Lo - Président UJECK" class="mb-photo" onerror="this.style.display='none'">
+        <div class="mb-info"><strong>Ndiaga Lo</strong><span>🏆 Président</span></div>
       </div>
-      <!-- Secrétaire général avec photo -->
-      <div class="membre-star">
-        <img src="secretaire.png" alt="Babacar Fall - Secrétaire général UJECK" class="membre-star-photo">
-        <div class="membre-star-info">
-          <strong>Babacar Fall</strong>
-          <span>Secrétaire général</span>
-        </div>
+      <div class="mb-card">
+        <img src="secretaire.png" alt="Babacar Fall - Secrétaire général UJECK" class="mb-photo" onerror="this.style.display='none'">
+        <div class="mb-info"><strong>Babacar Fall</strong><span>📋 Secrétaire général</span></div>
       </div>
-      <div class="membre"><div class="membre-av av-vert">KN</div><div><strong>Khady Niang</strong><span>Adjointe SG</span></div></div>
-      <div class="membre"><div class="membre-av av-or">MD</div><div><strong>Moustapha Diouf</strong><span>Trésorier général</span></div></div>
-      <div class="membre"><div class="membre-av av-bleu">AL</div><div><strong>Abdou Aziz Lo</strong><span>Adjoint trésorier</span></div></div>
-      <div class="membre"><div class="membre-av av-vert">MT</div><div><strong>Mbaye Thiam</strong><span>Président Commission pédagogique</span></div></div>
+    </div>
+    <div class="bureau-rest">
+      <div class="mb-small"><div class="mb-av av-vert">KN</div><div><strong>Khady Niang</strong><span>Adjointe SG</span></div></div>
+      <div class="mb-small"><div class="mb-av av-or">MD</div><div><strong>Moustapha Diouf</strong><span>Trésorier général</span></div></div>
+      <div class="mb-small"><div class="mb-av av-bleu">AL</div><div><strong>Abdou Aziz Lo</strong><span>Adjoint trésorier</span></div></div>
+      <div class="mb-small"><div class="mb-av av-vert">MT</div><div><strong>Mbaye Thiam</strong><span>Pdt Commission pédagogique</span></div></div>
     </div>
   </div>
 </section>
 <div class="sep"></div>
 
-<!-- TERRITOIRE + CARTE -->
+<!-- TERRITOIRE -->
 <section id="territoire">
   <div class="si reveal">
-    <div class="terr-grid">
-      <div class="terr-info">
-        <div class="section-tag">Notre territoire</div>
-        <h2 class="section-title">Keur Momar Sarr</h2>
-        <p>Commune de la région de Louga, au nord du Sénégal, où la jeunesse prend en main son avenir.</p>
-        <p>L'UJECK y ancre toutes ses actions : éducation des enfants et des adultes, soutien aux initiatives économiques, et renforcement du lien social entre habitants.</p>
-        <p style="color:var(--or);font-weight:600;font-size:13px;margin-top:8px">📍 Région de Louga · Sénégal</p>
+    <div class="terr-header">
+      <div class="stag">Notre territoire</div>
+      <h2 class="stit">Keur Momar Sarr</h2>
+      <p class="slead">Commune de la région de Louga, au nord du Sénégal — terre d'agriculture, d'eau et de jeunesse engagée.</p>
+    </div>
+    <div class="galerie">
+      <div class="gal-item grand">
+        <img src="kms_lac.png" alt="Lac de Guiers">
+        <div class="gal-caption">🌊 Lac de Guiers</div>
       </div>
-      <div class="carte-wrap">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60960!2d-15.59!3d15.66!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec6d63f9bffffffd%3A0x4cd3c56c1dea1a4a!2sKeur%20Momar%20Sarr%2C%20S%C3%A9n%C3%A9gal!5e0!3m2!1sfr!2sfr!4v1700000000000!5m2!1sfr!2sfr" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Carte Keur Momar Sarr"></iframe>
+      <div class="gal-item">
+        <img src="kms_panneau.png" alt="Entrée de la commune">
+        <div class="gal-caption">📍 Entrée de la commune</div>
       </div>
+      <div class="gal-item">
+        <img src="kms_station.png" alt="Station KMS3">
+        <div class="gal-caption">🏭 Station KMS3</div>
+      </div>
+      <div class="gal-item">
+        <img src="kms_champs.png" alt="Agriculture">
+        <div class="gal-caption">🌱 Agriculture</div>
+      </div>
+      <div class="gal-item">
+        <img src="kms_entree.png" alt="Infrastructures">
+        <div class="gal-caption">🏗️ Infrastructures KMS</div>
+      </div>
+    </div>
+    <div class="carte-box">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60960!2d-15.59!3d15.66!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec6d63f9bffffffd%3A0x4cd3c56c1dea1a4a!2sKeur%20Momar%20Sarr%2C%20S%C3%A9n%C3%A9gal!5e0!3m2!1sfr!2sfr!4v1700000000000!5m2!1sfr!2sfr" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Carte Keur Momar Sarr"></iframe>
     </div>
   </div>
 </section>
@@ -288,44 +396,42 @@
 <!-- VALEURS -->
 <section id="valeurs">
   <div class="si reveal">
-    <div class="section-tag">Nos valeurs</div>
-    <h2 class="section-title">Ce qui nous guide</h2>
-    <p class="section-lead">Quatre principes fondateurs qui orientent chaque action de l'UJECK.</p>
-    <div class="valeurs-grid">
-      <div class="valeur"><div class="valeur-icon">🎯</div><div><h4>Engagement citoyen</h4><p>Chaque membre est acteur du changement dans sa commune, avec responsabilité et conviction.</p></div></div>
-      <div class="valeur"><div class="valeur-icon">💚</div><div><h4>Solidarité</h4><p>La force de la jeunesse réside dans son unité et sa capacité à s'entraider sans distinction.</p></div></div>
-      <div class="valeur"><div class="valeur-icon">🔍</div><div><h4>Transparence</h4><p>Gouvernance ouverte, décisions collectives et gestion rigoureuse et honnête.</p></div></div>
-      <div class="valeur"><div class="valeur-icon">🌍</div><div><h4>Ancrage local</h4><p>Nous agissons d'abord pour Keur Momar Sarr, en valorisant ses ressources humaines et naturelles.</p></div></div>
+    <div class="stag">Nos valeurs</div>
+    <h2 class="stit">Ce qui nous guide</h2>
+    <p class="slead">Quatre principes fondateurs qui orientent chaque action de l'UJECK.</p>
+    <div class="valeurs">
+      <div class="valeur"><div class="val-icon">🎯</div><div><h4>Engagement citoyen</h4><p>Chaque membre est acteur du changement dans sa commune, avec responsabilité et conviction.</p></div></div>
+      <div class="valeur"><div class="val-icon">💚</div><div><h4>Solidarité</h4><p>La force de la jeunesse réside dans son unité et sa capacité à s'entraider sans distinction.</p></div></div>
+      <div class="valeur"><div class="val-icon">🔍</div><div><h4>Transparence</h4><p>Gouvernance ouverte, décisions collectives et gestion rigoureuse et honnête.</p></div></div>
+      <div class="valeur"><div class="val-icon">🌍</div><div><h4>Ancrage local</h4><p>Nous agissons d'abord pour Keur Momar Sarr, en valorisant ses ressources humaines et naturelles.</p></div></div>
     </div>
   </div>
 </section>
 <div class="sep"></div>
 
 <!-- ADHÉSION -->
-<section id="adhesion" class="adhesion-section">
+<section id="adhesion" class="adh-section">
   <div class="si">
-    <div style="text-align:center;margin-bottom:36px" class="reveal">
-      <div class="section-tag" style="color:rgba(46,204,113,0.9)">Rejoignez-nous</div>
-      <h2 class="section-title">Adhérer à l'UJECK</h2>
-      <p class="section-lead" style="margin:0 auto 0;text-align:center">Vous êtes jeune de Keur Momar Sarr ou originaire de la commune ? Participez au développement de votre territoire.</p>
+    <div style="text-align:center;margin-bottom:40px" class="reveal">
+      <div class="stag" style="justify-content:center;color:rgba(46,204,113,0.9)">Rejoignez-nous</div>
+      <h2 class="stit">Adhérer à l'UJECK</h2>
+      <p style="color:rgba(255,255,255,0.65);font-size:15px;max-width:500px;margin:0 auto;line-height:1.7">Vous êtes jeune de Keur Momar Sarr ou originaire de la commune ? Participez au développement de votre territoire.</p>
     </div>
-
     <div class="etapes-bar">
-      <div class="etape-ind active" id="ind-1"><div class="enum">1</div><div class="elbl">Infos</div></div>
-      <div class="etape-line"></div>
-      <div class="etape-ind pending" id="ind-2"><div class="enum">2</div><div class="elbl">Paiement</div></div>
-      <div class="etape-line"></div>
-      <div class="etape-ind pending" id="ind-3"><div class="enum">3</div><div class="elbl">Confirmation</div></div>
+      <div class="ei active" id="ind-1"><div class="en">1</div><div class="el">Infos</div></div>
+      <div class="eline"></div>
+      <div class="ei pending" id="ind-2"><div class="en">2</div><div class="el">Paiement</div></div>
+      <div class="eline"></div>
+      <div class="ei pending" id="ind-3"><div class="en">3</div><div class="el">Confirmation</div></div>
     </div>
-
     <div class="adh-box">
       <!-- ÉTAPE 1 -->
       <div id="etape-1">
         <div class="adh-card">
           <h3>Votre demande d'adhésion</h3>
-          <p class="adh-lead">Remplissez le formulaire — nous vous guiderons pour le paiement ensuite.</p>
+          <p class="adh-lead">Remplissez ce formulaire — nous vous guiderons pour le paiement ensuite.</p>
           <form id="adh-form" onsubmit="soumettreForm(event)" novalidate>
-            <div class="form-row">
+            <div class="frow">
               <div><label for="nom">Nom complet *</label><input id="nom" type="text" required placeholder="Prénom Nom"></div>
               <div><label for="tel">Téléphone *</label><input id="tel" type="tel" inputmode="numeric" required placeholder="78 000 00 00" maxlength="14" oninput="formatTel(this)"></div>
             </div>
@@ -339,9 +445,9 @@
               </div>
             </div>
             <div class="fg"><label for="motivation">Motivation (optionnel)</label><textarea id="motivation" rows="3" placeholder="Dites-nous pourquoi vous souhaitez rejoindre l'UJECK."></textarea></div>
-            <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:14px">Frais d'adhésion : 1 000 FCFA · Cotisation : 500 FCFA/mois</p>
-            <button type="submit" class="btn-submit" id="btn-submit">Envoyer ma demande →</button>
-            <div id="form-err" style="font-size:14px;color:#fff;background:rgba(220,50,50,0.25);border:1px solid rgba(220,50,50,0.6);border-radius:10px;padding:12px 16px;margin-top:12px;display:none;line-height:1.5"></div>
+            <p style="font-size:12px;color:rgba(255,255,255,0.35);margin-bottom:16px">Frais d'adhésion : 1 000 FCFA · Cotisation : 500 FCFA/mois</p>
+            <button type="submit" class="btn-sub" id="btn-submit">Envoyer ma demande →</button>
+            <div id="form-err"></div>
           </form>
         </div>
       </div>
@@ -350,55 +456,53 @@
       <div id="etape-2" style="display:none">
         <div class="adh-card">
           <h3>💸 Paiement des frais</h3>
-          <p class="adh-lead">Votre demande est enregistrée ! Payez maintenant pour finaliser votre adhésion.</p>
-          <div class="pay-montant">
-            <div style="font-size:11px;color:rgba(245,197,0,0.7);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Montant à envoyer</div>
-            <div class="gros">1 000 <span style="font-size:20px">FCFA</span></div>
-            <div class="num-dest">📱 78 288 47 22</div>
+          <p class="adh-lead">Votre demande est enregistrée ! Payez maintenant pour finaliser.</p>
+          <div class="pay-mont">
+            <div style="font-size:11px;color:rgba(245,197,0,0.7);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Montant à envoyer</div>
+            <div class="gros">1 000 <span style="font-size:22px">FCFA</span></div>
+            <div class="dest">📱 78 288 47 22</div>
             <div class="sub">Mentionnez votre nom lors du transfert</div>
           </div>
-          <p style="font-size:12px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">👆 Choisissez votre moyen de paiement :</p>
+          <p style="font-size:12px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px">👆 Choisissez votre moyen de paiement :</p>
           <div class="pay-choix">
-            <div class="pay-btn pay-btn-wave" id="btn-wave" onclick="choisirWave()">
-              <div class="emo">🌊</div><div class="titre">Wave</div><div class="sous">Payer avec Wave</div>
+            <div class="pbtn pbtn-wave" id="btn-wave" onclick="choisirWave()">
+              <div class="emo">🌊</div><div class="pt">Wave</div><div class="ps">Payer avec Wave</div>
             </div>
-            <div class="pay-btn pay-btn-om" id="btn-om" onclick="choisirOM()">
-              <div class="emo">🟠</div><div class="titre">Orange Money</div><div class="sous">Payer avec MaxIt</div>
+            <div class="pbtn pbtn-om" id="btn-om" onclick="choisirOM()">
+              <div class="emo">🟠</div><div class="pt">Orange Money</div><div class="ps">Payer avec MaxIt</div>
             </div>
           </div>
           <div class="pay-msg" id="pay-msg"></div>
-
-          <!-- Upload capture -->
-          <div id="upload-zone" style="display:none;margin-bottom:14px;">
-            <div style="font-size:12px;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">📸 Joindre la capture d'écran du paiement *</div>
-            <label for="capture-input" id="upload-label" style="display:flex;flex-direction:column;align-items:center;gap:8px;background:rgba(255,255,255,0.06);border:2px dashed rgba(255,255,255,0.25);border-radius:14px;padding:20px;cursor:pointer;transition:all .2s;">
-              <div style="font-size:32px">📎</div>
-              <div style="font-size:14px;font-weight:600;color:#fff">Cliquez pour joindre une image</div>
-              <div style="font-size:12px;color:rgba(255,255,255,0.45)">JPG, PNG, capture d'écran acceptés</div>
+          <div class="upload-zone" id="upload-zone">
+            <div style="font-size:12px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">📸 Joindre la capture d'écran du paiement *</div>
+            <label for="capture-input" class="upload-label" id="upload-label">
+              <div class="ui">📎</div>
+              <div class="ut">Cliquez pour joindre une image</div>
+              <div class="us">JPG, PNG — capture Wave ou Orange Money</div>
             </label>
             <input type="file" id="capture-input" accept="image/*" style="display:none" onchange="previewCapture(this)">
-            <div id="capture-preview" style="display:none;margin-top:10px;text-align:center;">
-              <img id="preview-img" style="max-width:100%;max-height:180px;border-radius:10px;border:2px solid rgba(46,204,113,0.5);" alt="Capture paiement">
-              <div style="font-size:12px;color:rgba(46,204,113,0.9);margin-top:6px;">✅ Capture jointe — vous pouvez confirmer</div>
-              <button type="button" onclick="supprimerCapture()" style="font-size:12px;color:rgba(255,100,100,0.8);background:none;border:none;cursor:pointer;margin-top:4px;">✕ Supprimer</button>
+            <div id="capture-preview" style="display:none;margin-top:12px;text-align:center">
+              <img id="preview-img" style="max-width:100%;max-height:200px;border-radius:12px;border:2px solid rgba(46,204,113,0.5)" alt="Capture paiement">
+              <div style="font-size:12px;color:rgba(46,204,113,0.9);margin-top:8px">✅ Capture jointe — vous pouvez confirmer</div>
+              <button type="button" onclick="supprimerCapture()" style="font-size:12px;color:rgba(255,100,100,0.7);background:none;border:none;cursor:pointer;margin-top:4px">✕ Supprimer</button>
             </div>
           </div>
-
           <button class="btn-jpaye" id="btn-jpaye" onclick="etape3()" disabled>✅ J'ai payé — Confirmer</button>
-          <button class="btn-retour" onclick="retour1()">← Retour</button>
+          <button class="btn-ret" onclick="retour1()">← Retour</button>
         </div>
       </div>
 
       <!-- ÉTAPE 3 -->
       <div id="etape-3" style="display:none">
         <div class="adh-card" style="text-align:center">
-          <div class="confetti">🎉</div>
+          <div class="conf-emoji">🎉</div>
           <h3>Adhésion complète !</h3>
-          <p id="confirm-nom" class="adh-lead" style="margin-bottom:16px"></p>
-          <div class="confirm-checks">
-            <p>✅ Formulaire soumis</p>
+          <p id="confirm-nom" class="adh-lead" style="margin-bottom:0"></p>
+          <div class="conf-checks">
+            <p>✅ Formulaire soumis avec succès</p>
             <p>✅ Paiement effectué</p>
-            <p class="note">Le bureau UJECK vous contactera pour valider votre dossier.<br>Cotisation mensuelle : <strong style="color:var(--or)">500 FCFA/mois</strong></p>
+            <p>✅ Capture d'écran jointe</p>
+            <p class="note">Le bureau UJECK vérifiera votre paiement et validera votre adhésion.<br>Cotisation mensuelle : <strong style="color:var(--or)">500 FCFA/mois</strong></p>
           </div>
           <a href="https://chat.whatsapp.com/JTGSBMGHr2rBjqP1j380eZ" target="_blank" class="btn-wa" onclick="ouvrirGroupeWA(event)">📱 Rejoindre le groupe WhatsApp UJECK</a>
         </div>
@@ -411,61 +515,64 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="si reveal">
-    <div class="section-tag">Nous contacter</div>
-    <h2 class="section-title">Contactez l'UJECK</h2>
-    <p class="section-lead">Notre bureau est à votre disposition pour toute question.</p>
+    <div class="stag">Nous contacter</div>
+    <h2 class="stit">Contactez l'UJECK</h2>
+    <p class="slead">Notre bureau est à votre disposition pour toute question ou information.</p>
     <div class="contact-grid">
-      <div class="contact-card">
+      <div class="cc">
         <h4>🏢 Association</h4>
-        <div class="c-row">
-          <div class="c-item"><strong>Nom complet</strong>Union des Jeunes Engagés pour la Commune de Keur Momar Sarr</div>
-          <div class="c-item"><strong>Siège social</strong>Keur Momar Sarr, Louga, Sénégal</div>
-          <div class="c-item"><strong>Fondée le</strong>21 septembre 2024</div>
-          <div class="c-item"><strong>Email</strong><a href="mailto:ujeck2024@gmail.com?subject=Contact UJECK&body=Bonjour,%0A%0AJe vous contacte au sujet de l'UJECK.%0A%0ACordialement,">ujeck2024@gmail.com</a></div>
-        </div>
+        <div class="ci"><strong>Nom complet</strong>Union des Jeunes Engagés pour la Commune de Keur Momar Sarr</div>
+        <div class="ci"><strong>Siège social</strong>Keur Momar Sarr, Louga, Sénégal</div>
+        <div class="ci"><strong>Fondée le</strong>21 septembre 2024</div>
+        <div class="ci"><strong>Loi</strong>n°64-72 du 22 juin 1964</div>
+        <div class="ci"><strong>Email</strong><a href="mailto:ujeck2024@gmail.com?subject=Contact UJECK">ujeck2024@gmail.com</a></div>
       </div>
-      <div class="contact-card">
+      <div class="cc">
         <h4>📞 Contacts directs</h4>
-        <div class="c-row">
-          <div class="c-item"><strong>Président</strong>Ndiaga Lo<br><a href="tel:+221783357513" class="tel">78 335 75 13</a></div>
-          <div class="c-item"><strong>Secrétaire général</strong>Babacar Fall<br><a href="tel:+221779490848" class="tel">77 949 08 48</a></div>
-          <div class="c-item"><strong>Trésorier</strong>Moustapha Diouf<br><a href="tel:+221782884722" class="tel">78 288 47 22</a> · <a href="https://wa.me/221782884722" target="_blank">WhatsApp</a></div>
-        </div>
+        <div class="ci"><strong>Président</strong>Ndiaga Lo<br><a href="tel:+221783357513" class="tel">78 335 75 13</a></div>
+        <div class="ci"><strong>Secrétaire général</strong>Babacar Fall<br><a href="tel:+221779490848" class="tel">77 949 08 48</a></div>
+        <div class="ci"><strong>Trésorier</strong>Moustapha Diouf<br><a href="tel:+221782884722" class="tel">78 288 47 22</a> · <a href="https://wa.me/221782884722" target="_blank">WhatsApp</a></div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <div class="foot-inner">
-    <div class="foot-brand">
+  <div class="foot-in">
+    <div class="fb">
+      <img src="logo.png" alt="Logo UJECK" onerror="this.style.display='none'">
       <strong>UJECK</strong>
-      <p>Union des Jeunes Engagés pour la Commune de Keur Momar Sarr — Louga, Sénégal.<br>
-      <a href="https://ujeck2024-hue.github.io/ujeck" style="color:var(--or);font-size:12px">ujeck2024-hue.github.io/ujeck</a></p>
+      <p>Union des Jeunes Engagés pour la Commune de Keur Momar Sarr.<br>Louga, Sénégal · Fondée en 2024.</p>
     </div>
-    <div class="foot-nav">
+    <div class="fn">
       <strong>Navigation</strong>
       <ul>
         <li><a href="#mission">Nos piliers</a></li>
         <li><a href="#gouvernance">Bureau</a></li>
         <li><a href="#territoire">Commune</a></li>
+        <li><a href="#valeurs">Nos valeurs</a></li>
         <li><a href="#adhesion">Adhérer</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
-    <div class="foot-nav">
+    <div class="fn">
       <strong>Mentions</strong>
-      <p style="font-size:12px;color:rgba(255,255,255,0.4)">© 2024 UJECK<br>Keur Momar Sarr, Louga, Sénégal.</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.35);line-height:1.7">© 2024 UJECK<br>Keur Momar Sarr, Louga<br>Sénégal</p>
     </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2024 UJECK — Tous droits réservés</span>
+    <span style="color:rgba(245,197,0,0.6)">🇸🇳 Keur Momar Sarr · Louga · Sénégal</span>
   </div>
 </footer>
 
 <script>
   emailjs.init('dZ6poEGusGcH61smv');
-  var _nom = '';
+  var _nom='';
 
   function toggleMenu(){document.getElementById('nav-links').classList.toggle('open')}
-  document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nav-links').classList.remove('open')));
+  document.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener('click',function(){document.getElementById('nav-links').classList.remove('open')})});
 
   function formatTel(input){
     var v=input.value.replace(/\D/g,'').slice(0,9),f='';
@@ -475,7 +582,6 @@
     if(v.length>7)f+=' '+v.slice(7,9);
     input.value=f;
   }
-
   function toggleSec(btn){btn.classList.toggle('sel')}
 
   function soumettreForm(e){
@@ -483,14 +589,14 @@
     var nom=document.getElementById('nom').value.trim();
     var tel=document.getElementById('tel').value.trim();
     var quartier=document.getElementById('quartier').value.trim();
-    var sections=[...document.querySelectorAll('.sec-btn.sel')].map(b=>b.dataset.sec);
+    var sections=[...document.querySelectorAll('.sec-btn.sel')].map(function(b){return b.dataset.sec});
     var motivation=document.getElementById('motivation').value.trim();
     var err=document.getElementById('form-err');
     var manquants=[];
-    if(!nom) manquants.push('Nom complet');
-    if(!tel) manquants.push('Téléphone');
-    if(!quartier) manquants.push('Quartier / Village');
-    if(sections.length===0) manquants.push('au moins une Section');
+    if(!nom)manquants.push('Nom complet');
+    if(!tel)manquants.push('Téléphone');
+    if(!quartier)manquants.push('Quartier');
+    if(sections.length===0)manquants.push('au moins une Section');
     if(manquants.length>0){
       err.innerHTML='⚠️ Champs manquants : <strong>'+manquants.join(', ')+'</strong>';
       err.style.display='block';
@@ -521,8 +627,8 @@
     document.getElementById('pay-msg').style.display='none';
     document.getElementById('btn-wave').classList.remove('choisi');
     document.getElementById('btn-om').classList.remove('choisi');
-    var bjp=document.getElementById('btn-jpaye');
-    bjp.disabled=true;bjp.classList.remove('actif');
+    document.getElementById('upload-zone').style.display='none';
+    supprimerCapture();
     setInd(1);
   }
 
@@ -530,9 +636,9 @@
     document.getElementById('btn-wave').classList.add('choisi');
     document.getElementById('btn-om').classList.remove('choisi');
     var msg=document.getElementById('pay-msg');
-    msg.innerHTML='🌊 <strong>Wave :</strong> Ouvrez votre app Wave → Envoyer → tapez <strong style="color:var(--or)">78 288 47 22</strong> → montant <strong style="color:var(--or)">1 000 FCFA</strong> → Confirmer. Puis revenez cliquer "J\'ai payé".';
+    msg.innerHTML='🌊 <strong>Wave :</strong> Ouvrez votre app Wave → Envoyer → <strong style="color:var(--or)">78 288 47 22</strong> → <strong style="color:var(--or)">1 000 FCFA</strong> → Confirmer. Puis joignez la capture ci-dessous.';
     msg.style.display='block';
-    activerJpaye();
+    document.getElementById('upload-zone').style.display='block';
     if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)){window.location.href='wave://';}
   }
 
@@ -540,49 +646,41 @@
     document.getElementById('btn-om').classList.add('choisi');
     document.getElementById('btn-wave').classList.remove('choisi');
     var msg=document.getElementById('pay-msg');
-    msg.innerHTML='🟠 <strong>Orange Money / MaxIt :</strong> Composez <strong style="color:var(--or)">*144#</strong> ou ouvrez MaxIt → Transfert → <strong style="color:var(--or)">78 288 47 22</strong> → <strong style="color:var(--or)">1 000 FCFA</strong>. Puis revenez cliquer "J\'ai payé".';
+    msg.innerHTML='🟠 <strong>Orange Money / MaxIt :</strong> Composez <strong style="color:var(--or)">*144#</strong> ou ouvrez MaxIt → Transfert → <strong style="color:var(--or)">78 288 47 22</strong> → <strong style="color:var(--or)">1 000 FCFA</strong>. Puis joignez la capture ci-dessous.';
     msg.style.display='block';
-    activerJpaye();
+    document.getElementById('upload-zone').style.display='block';
     if(/Android/i.test(navigator.userAgent)){
       window.location.href='intent://send#Intent;scheme=orangemoney;package=com.orange.sn.maxit;end';
       setTimeout(function(){window.open('https://play.google.com/store/apps/details?id=com.orange.sn.maxit','_blank');},2000);
     }else if(/iPhone|iPad|iPod/i.test(navigator.userAgent)){
       window.location.href='maxit://';
-      setTimeout(function(){window.open('https://apps.apple.com/sn/app/maxit/id1458054573','_blank');},2000);
     }
   }
 
-  function activerJpaye(){
-    // Afficher la zone upload après choix du moyen de paiement
-    document.getElementById('upload-zone').style.display = 'block';
-    // Le bouton reste désactivé jusqu'à ce qu'une capture soit jointe
-  }
-
   function previewCapture(input){
-    if(input.files && input.files[0]){
-      var reader = new FileReader();
-      reader.onload = function(e){
-        document.getElementById('preview-img').src = e.target.result;
-        document.getElementById('capture-preview').style.display = 'block';
-        document.getElementById('upload-label').style.display = 'none';
-        // Activer le bouton J'ai payé
-        var btn = document.getElementById('btn-jpaye');
-        btn.disabled = false;
-        btn.classList.add('actif');
+    if(input.files&&input.files[0]){
+      var reader=new FileReader();
+      reader.onload=function(e){
+        document.getElementById('preview-img').src=e.target.result;
+        document.getElementById('capture-preview').style.display='block';
+        document.getElementById('upload-label').style.display='none';
+        var btn=document.getElementById('btn-jpaye');
+        btn.disabled=false;btn.classList.add('actif');
       };
       reader.readAsDataURL(input.files[0]);
     }
   }
 
   function supprimerCapture(){
-    document.getElementById('capture-input').value = '';
-    document.getElementById('preview-img').src = '';
-    document.getElementById('capture-preview').style.display = 'none';
-    document.getElementById('upload-label').style.display = 'flex';
-    // Désactiver le bouton J'ai payé
-    var btn = document.getElementById('btn-jpaye');
-    btn.disabled = true;
-    btn.classList.remove('actif');
+    document.getElementById('capture-input').value='';
+    var pi=document.getElementById('preview-img');
+    if(pi)pi.src='';
+    var cp=document.getElementById('capture-preview');
+    if(cp)cp.style.display='none';
+    var ul=document.getElementById('upload-label');
+    if(ul)ul.style.display='flex';
+    var btn=document.getElementById('btn-jpaye');
+    if(btn){btn.disabled=true;btn.classList.remove('actif');}
   }
 
   function etape3(){
@@ -590,7 +688,7 @@
     document.getElementById('etape-3').style.display='block';
     setInd(3);
     document.getElementById('confirm-nom').textContent='Bienvenue '+_nom+' dans la famille UJECK ! 🎉';
-    setTimeout(ouvrirGroupeWA,2000);
+    setTimeout(ouvrirGroupeWA,2500);
   }
 
   function ouvrirGroupeWA(e){
@@ -603,7 +701,7 @@
   function setInd(n){
     ['ind-1','ind-2','ind-3'].forEach(function(id,i){
       var el=document.getElementById(id);
-      el.className='etape-ind '+(i+1<n?'done':i+1===n?'active':'pending');
+      el.className='ei '+(i+1<n?'done':i+1===n?'active':'pending');
     });
   }
 
